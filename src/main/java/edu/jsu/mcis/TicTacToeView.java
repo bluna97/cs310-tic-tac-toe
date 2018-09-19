@@ -1,6 +1,7 @@
 package edu.jsu.mcis;
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class TicTacToeView extends JPanel implements ActionListener {
@@ -12,8 +13,27 @@ public class TicTacToeView extends JPanel implements ActionListener {
     public TicTacToeView(TicTacToeModel model) {
         
         this.model = model;
+		JPanel squaresPanel = new JPanel(new GridLayout(model.getWidth(), model.getWidth()));
+		
+		JButton[][] squares = new JButton[model.getWidth()][model.getWidth()];
+		
+		for(int i = 0; i < model.getWidth(); i++){
+			for(int j = 0; j < model.getWidth(); j++){
+				squares[i][j] = new JButton();
+				squares[i][j].addActionListener(this);
+				squares[i][j].setName("Square" + i + j);
+				squaresPanel.add(squares[i][j]);
+			}
+		}
+		
+		add(squaresPanel);
         
     }
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
 
     public void showNextMovePrompt() {
 
