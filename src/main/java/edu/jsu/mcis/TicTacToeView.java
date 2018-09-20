@@ -7,19 +7,30 @@ import javax.swing.*;
 public class TicTacToeView extends JPanel implements ActionListener {
 
     private TicTacToeModel model;
+	private JPanel squaresPanel;
+	private JLabel resultLabel;
+	private JButton[][] squares;
     
     /* CONSTRUCTOR */
 	
     public TicTacToeView(TicTacToeModel model) {
         
         this.model = model;
-		JPanel squaresPanel = new JPanel(new GridLayout(model.getWidth(), model.getWidth()));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		
-		JButton[][] squares = new JButton[model.getWidth()][model.getWidth()];
+		squaresPanel = new JPanel(new GridLayout(model.getWidth(), model.getWidth()));
+		
+		resultLabel = new JLabel();
+		resultLabel.setName("ResultLabel");
+		resultLabel.setText("Welcome to Tic-Tac-Toe!");
+		resultLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		
+		squares = new JButton[model.getWidth()][model.getWidth()];
 		
 		for(int i = 0; i < model.getWidth(); i++){
 			for(int j = 0; j < model.getWidth(); j++){
 				squares[i][j] = new JButton();
+				squares[i][j].setPreferredSize(new Dimension(64, 64));
 				squares[i][j].addActionListener(this);
 				squares[i][j].setName("Square" + i + j);
 				squaresPanel.add(squares[i][j]);
@@ -27,93 +38,45 @@ public class TicTacToeView extends JPanel implements ActionListener {
 		}
 		
 		add(squaresPanel);
+		add(resultLabel);
         
     }
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		for(int i = 0; i < model.getWidth(); i++){
+			for(int j = 0; j < model.getWidth(); j++){
+				if (squares[i][j] == e.getSource()){
+					squares[i][j].setEnabled(false);
+					if(model.isXTurn()){
+						squares[i][j].setText("X");
+						model.makeMark(i, j);
+					}
+					else {
+						squares[i][j].setText("O");
+						model.makeMark(i, j);
+					}
+				}
+			}
+		}
 		
+		if(model.isGameover()){
+			for(int i = 0; i < model.getWidth(); i++){
+				for(int j = 0; j < model.getWidth(); j++){
+					squares[i][j].setEnabled(false);
+				}
+			}
+			
+			if(model.getResult() == TicTacToeModel.Result.X){
+				resultLabel.setText("X");
+			}
+			if(model.getResult() == TicTacToeModel.Result.O){
+				resultLabel.setText("O");
+			}
+			if(model.getResult() == TicTacToeModel.Result.TIE){
+				resultLabel.setText("TIE");
+			}
+			
+		}
 	}
-
-    public void showNextMovePrompt() {
-
-        /* Display a prompt for the player's next move (see examples) */
-
-        /* INSERT YOUR CODE HERE */
-		/*
-		System.out.println();
-		if(model.isXTurn()){
-			System.out.println("Player 1 (X) Move:");
-			System.out.print("Enter the row and column numbers, separated by a space: ");
-		}
-		else{
-			System.out.println("Player 2 (O) Move:");
-			System.out.print("Enter the row and column numbers, separated by a space: ");
-		}
-*/
-    }
-
-    public void showInputError() {
-
-        /* Display an error if input is invalid (see examples) */
-
-        /* INSERT YOUR CODE HERE */
-		
-		//System.out.println("Invalid location. Please try again.");
-
-    }
-
-    public void showResult(String r) {
-
-        /* Display final winner */
-
-        //System.out.println(r + "!");
-
-    }
-	
 }
-
-/*
-public class TicTacToeController {
-
-    private TicTacToeModel model;
-    private TicTacToeView view;
-    private Scanner keyboard;
-  */  
-    /* CONSTRUCTOR */
-
-   // public TicTacToeController(TicTacToeModel model, TicTacToeView view) {
-        
-        /* Initialize model and view */
-
-        //this.model = model;
-        //this.view = view;
-        
-        /* Initialize scanner (for console keyboard) */
-        
-        //keyboard = new Scanner(System.in);
-
-    //}
-
-    //public void controlModel() {
-        
-        /* Prompt player for next move using view's showNextMovePrompt() */
-        
-        //view.showNextMovePrompt();
-        
-        /* Receive and validate input, which should be read at the keyboard as
-           two integers, the row and the column (for example, "1 1" for the
-           center square of a 3 x 3 grid).  Make mark if input is valid, or show
-           error message using view's showInputError() if input is invalid. */
-        
-        /* INSERT YOUR CODE HERE */
-		
-		//int row = keyboard.nextInt();
-		//int col = keyboard.nextInt();
-		
-		//if(!model.makeMark(row, col)){
-		//	view.showInputError();
-//		}
-   // }
-
-//}
