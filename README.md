@@ -1,5 +1,5 @@
 # Introduction
-This is a project that I worked on in my Software Engineering class in the fall of 2018. It is an implementation of Tic-Tac-Toe in Java and was created using the Gradle build tool. In this project, the professor instructed us students to use the model-view-controller technique. The professor included a few lines of code as a starting point and left the rest of the project to the students. The project consists of 3 classes: TicTacToe.java, TicTacToeModel.java, and TicTacToeView.java.
+This is a project that I worked on in my Software Engineering class in the fall of 2018. It is an implementation of Tic-Tac-Toe in Java and was created using the Gradle build tool. In this project, the professor instructed us students to use the model-view-controller technique. The professor included a few lines of code as a starting point and left the rest of the project to the students. The professor also included unit tests to use with Gradle. The project consists of 3 classes: TicTacToe.java, TicTacToeModel.java, and TicTacToeView.java.
 # The Program
 In the model-view-controller programming technique, the program is separated into three parts. The model contains the logic of the program and uses any classes or objects that are created. The view handles the output of the model to the screen or to a graphical user interface. It also receives the user input. Connecting the two is the controller. The controller takes the model's logic and passes it onto the view. Similarly, the controller also takes the view's user input and gives it to the model for use.
 
@@ -25,4 +25,4 @@ After the Mark is made in the ActionPerformed, the TicTacToeView calls the metho
 
 The TicTacToe main class just calls the constructors for the model and view objects and instantiates a JFrame to hold the JPanel.
 # Conclusion
-Using the model-view-controller programming technique, I separated the logic and the user interface for an implementation of Tic-Tac-Toe. This ensures that each part of the program has a specific task that it performs, instead of each part having many tasks.
+Using the model-view-controller programming technique, I separated the logic and the user interface for an implementation of Tic-Tac-Toe. This ensures that each part of the program has a specific task that it performs, instead of each part having many tasks. Using the Gradle build tool, I ran unit tests to confirm that the program was running as intended.
