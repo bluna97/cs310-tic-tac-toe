@@ -14,7 +14,15 @@ The isMarkWin method determines the winner of the game. Its only argument is a M
 The isTie method uses the isMarkWin method to determine if there is no winner. It does this by calling the isMarkWin method for both X and O. If both calls return false, then it iterates through the grid to count the number of EMPTY Marks. If there are no EMPTY Marks, then there is a tie.
 
 The getResult method uses the isMarkWin method to determine the result of the game after a turn. It initializes a Result enum to the NONE value. It then calls the isMarkWin method for both X and O to determine the winner. If a Mark has won, then the Result enum is changed to the respective value. It also checks for a tie using the isTie method. If there is a tie, then the Result enum is changed to TIE. If neither Mark has won and there is no tie, then the game is still in progress and the enum's value remains NONE. The method then returns the Result enum.
+
+The TicTacToeModel also uses a method called isGameOver which simply calls the getResult method. It checks the Result enum and returns a boolean. If the enum's value is NONE, then the game is not over and it returns false. Otherwise, it returns true.
 # The GUI
 Originally, the program displayed the grid to the command prompt, and the users would enter coordinates in the command prompt to place Marks. In the final version of this project, the program uses a graphical user interface to play the game. The workings of the controller was moved to the TicTacToeView class.
 
-The TicTacToeView class uses a JPanel for the GUI. It creates a 2D array of JButtons to represent the model's grid.
+The TicTacToeView class uses a JPanel for the GUI. It creates a 2D array of JButtons with ActionListeners to represent the model's grid. It also contains a JLabel to show the winner. The ActionPerformed takes the place of the controller. It gets the source of the Action to determine which button in the grid was clicked. It uses the model's makeMark method to make a mark on the grid. Afterwards, it sets the JButton's text to either X or O, depending on whose turn it is.
+
+After the Mark is made in the ActionPerformed, the TicTacToeView calls the method's isGameOver to check if the game is over. If it is, it displays the winner in the JLabel.
+
+The TicTacToe main class just calls the constructors for the model and view objects and instantiates a JFrame to hold the JPanel.
+# Conclusion
+Using the model-view-controller programming technique, I separated the logic and the user interface for an implementation of Tic-Tac-Toe. This ensures that each part of the program has a specific task that it performs, instead of each part having many tasks.
