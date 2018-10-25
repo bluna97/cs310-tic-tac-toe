@@ -1,7 +1,7 @@
 # Introduction
 This is a project that I worked on in my Software Engineering class in the fall of 2018. It is an implementation of Tic-Tac-Toe in Java and was created using the Gradle build tool. In this project, the professor instructed us students to use the model-view-controller technique. The professor included a few lines of code as a starting point and left the rest of the project to the students. The project consists of 3 classes: TicTacToe.java, TicTacToeModel.java, and TicTacToeView.java.
 # The Program
-In the model-view-controller programming technique, the program is separated into three parts. The model contains the logic of the program and uses any classes or objects that are created. The view handles the output of the model to the screen or to a graphical user interface, or GUI. It also receives the user input. Connecting the two is the controller. The controller takes the model's logic and passes it onto the view. Similarly, the controller also takes the view's user input and gives it to the model for use.
+In the model-view-controller programming technique, the program is separated into three parts. The model contains the logic of the program and uses any classes or objects that are created. The view handles the output of the model to the screen or to a graphical user interface. It also receives the user input. Connecting the two is the controller. The controller takes the model's logic and passes it onto the view. Similarly, the controller also takes the view's user input and gives it to the model for use.
 
 In the original version of this project, the users play the game in the command prompt. The first user places Xs, while the second user places Os. In the TicTacToeModel class, an enum called Mark is used to represent the marks on the board. The enum's values include X, O, and EMPTY. Similarly, an enum called Result is used to represent the winner of the game. These values include X, O, TIE, and NONE. Both enums include toString methods that are used by the view.
 
@@ -15,3 +15,6 @@ The isTie method uses the isMarkWin method to determine if there is no winner. I
 
 The getResult method uses the isMarkWin method to determine the result of the game after a turn. It initializes a Result enum to the NONE value. It then calls the isMarkWin method for both X and O to determine the winner. If a Mark has won, then the Result enum is changed to the respective value. It also checks for a tie using the isTie method. If there is a tie, then the Result enum is changed to TIE. If neither Mark has won and there is no tie, then the game is still in progress and the enum's value remains NONE. The method then returns the Result enum.
 # The GUI
+Originally, the program displayed the grid to the command prompt, and the users would enter coordinates in the command prompt to place Marks. In the final version of this project, the program uses a graphical user interface to play the game. The workings of the controller was moved to the TicTacToeView class.
+
+The TicTacToeView class uses a JPanel for the GUI. It creates a 2D array of JButtons to represent the model's grid.
